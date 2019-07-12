@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.cryptox.demo.AndroidApplication
 import com.cryptox.demo.R.color
-import com.cryptox.demo.core.di.ApplicationComponent
 import com.cryptox.demo.core.extension.appContext
 import com.cryptox.demo.core.extension.viewContainer
 import kotlinx.android.synthetic.main.toolbar.*
@@ -25,13 +24,6 @@ import javax.inject.Inject
 abstract class BaseFragment : Fragment() {
 
     abstract fun layoutId(): Int
-
-    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        (activity?.application as AndroidApplication).appComponent
-    }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)

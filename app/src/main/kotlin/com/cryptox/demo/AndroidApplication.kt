@@ -1,28 +1,26 @@
 package com.cryptox.demo
 
 import android.app.Application
-import com.cryptox.demo.core.di.ApplicationComponent
-import com.cryptox.demo.core.di.ApplicationModule
-import com.cryptox.demo.core.di.DaggerApplicationComponent
+import com.cryptox.demo.core.di.appModules
 import com.squareup.leakcanary.BuildConfig
 import com.squareup.leakcanary.LeakCanary
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class AndroidApplication : Application() {
 
-    val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
-        DaggerApplicationComponent
-            .builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-    }
-
     override fun onCreate() {
         super.onCreate()
-        this.injectMembers()
-        this.initializeLeakDetection()
-    }
 
-    private fun injectMembers() = appComponent.inject(this)
+        this.initializeLeakDetection()
+        startKoin {
+            androidLogger(Level.DEBUG)
+            androidContext(this@AndroidApplication)
+            modules(appModules)
+        }
+    }
 
     private fun initializeLeakDetection() {
         if (BuildConfig.DEBUG) LeakCanary.install(this)

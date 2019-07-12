@@ -77,7 +77,6 @@ dependencies {
 
     //Compile time dependencies
     kapt applicationDependencies.archComponentsCompiler
-    kapt applicationDependencies.daggerCompiler
     compileOnly applicationDependencies.javaxAnnotation
     compileOnly applicationDependencies.javaxInject
 
@@ -95,7 +94,6 @@ dependencies {
     implementation applicationDependencies.design
     implementation applicationDependencies.androidAnnotations
     implementation applicationDependencies.glide
-    implementation applicationDependencies.dagger
     implementation applicationDependencies.retrofit
     implementation applicationDependencies.okhttpLoggingInterceptor
 
@@ -118,4 +116,7 @@ dependencies {
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop
     testImplementation developmentDependencies.leakCanaryNoop
+
+    // Koin
+    implementation applicationDependencies.koin
 }

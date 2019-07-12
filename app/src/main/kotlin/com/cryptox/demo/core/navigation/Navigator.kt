@@ -5,13 +5,9 @@ import com.cryptox.demo.features.MainActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
-@Singleton
-class Navigator
-@Inject constructor() {
+class Navigator {
 
     fun showMain(context: Context) = context.startActivity(MainActivity.callingIntent(context))
-    
 }
 
 
